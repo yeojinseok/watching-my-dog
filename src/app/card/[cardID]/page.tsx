@@ -1,4 +1,6 @@
+"use client";
 import Image from "next/image";
+import React from "react";
 
 /**
  * 카드 상세 페이지
@@ -18,16 +20,50 @@ export default function Page() {
   );
 }
 
+const 회전_각도 = 30;
+const 원근감_비율 = 800;
+
 const Card = () => {
+  const [transform, setTransform] = React.useState<string>(
+    "perspective(350px) rotateX(0deg) rotateY(0deg)"
+  );
+  const cardRef = React.useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+
+    const rect = cardRef.current.getBoundingClientRect();
+
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+
+    // 회전 각도 계산 (-30도 ~ 30도 범위)
+    const rotateY = 회전_각도 * (0.5 - x);
+    const rotateX = 회전_각도 * (y - 0.5);
+
+    setTransform(
+      `perspective(${원근감_비율}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+    );
+  };
+
+  const handleMouseLeave = () => {
+    setTransform(`perspective(${원근감_비율}px) rotateX(0deg) rotateY(0deg)`);
+  };
+
   return (
     <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="card"
       style={{
+        transform: transform,
         width: "350px",
         padding: "20px",
         backgroundColor: "yellow",
         borderRadius: "20px",
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        transition: "transform 0.1s ease-out",
       }}
     >
       <div
