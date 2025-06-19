@@ -9,28 +9,79 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      card_likes: {
+        Row: {
+          card_id: string
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          card_id: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          card_id?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_like_card"
+            columns: ["card_id"]
+            isOneToOne: false
+            referencedRelation: "cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_like_user"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cards: {
         Row: {
           created_at: string | null
+          description: string | null
           id: string
           image_url: string
+          like_count: number | null
+          name: string | null
+          type: Database["public"]["Enums"]["card_type"]
+          updated_at: string | null
           user_id: string | null
         }
         Insert: {
           created_at?: string | null
+          description?: string | null
           id?: string
           image_url: string
+          like_count?: number | null
+          name?: string | null
+          type: Database["public"]["Enums"]["card_type"]
+          updated_at?: string | null
           user_id?: string | null
         }
         Update: {
           created_at?: string | null
+          description?: string | null
           id?: string
           image_url?: string
+          like_count?: number | null
+          name?: string | null
+          type?: Database["public"]["Enums"]["card_type"]
+          updated_at?: string | null
           user_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "cards_user_id_fkey"
+            foreignKeyName: "fk_user"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -41,21 +92,30 @@ export type Database = {
       users: {
         Row: {
           created_at: string | null
-          email: string
+          email: string | null
           id: string
-          password: string
+          name: string | null
+          profile_image: string | null
+          provider: string
+          provider_id: string
         }
         Insert: {
           created_at?: string | null
-          email: string
+          email?: string | null
           id?: string
-          password: string
+          name?: string | null
+          profile_image?: string | null
+          provider: string
+          provider_id: string
         }
         Update: {
           created_at?: string | null
-          email?: string
+          email?: string | null
           id?: string
-          password?: string
+          name?: string | null
+          profile_image?: string | null
+          provider?: string
+          provider_id?: string
         }
         Relationships: []
       }
@@ -67,7 +127,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      card_type: "dog" | "item" | "background" | "frame"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -182,6 +242,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      card_type: ["dog", "item", "background", "frame"],
+    },
   },
 } as const
