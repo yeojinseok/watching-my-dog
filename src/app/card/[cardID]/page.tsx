@@ -62,10 +62,19 @@ const Card = () => {
     >
       {/* 오버레이 요소 */}
       <div
-        className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-[rgba(255,219,112,0.8)_45%,rgba(132,50,255,0.6)_50%] to-transparent bg-[length:150%_150%] mix-blend-color-dodge pointer-events-none transition-all duration-100"
+        className="overlay absolute top-0 left-0 w-full h-full rounded-2xl"
         style={{
-          backgroundPosition: overlayStyle.backgroundPosition,
-          filter: overlayStyle.filter,
+          zIndex: 10,
+          background: `linear-gradient(105deg,
+            transparent 40%,
+            rgba(255, 219, 112, 0.8) 45%,
+            rgba(132, 50, 255, 0.6) 50%,
+            transparent 54%)`,
+          mixBlendMode: "color-dodge",
+          backgroundSize: "150% 150%",
+          transition: "all 0.1s",
+          pointerEvents: "none",
+          ...overlayStyle,
         }}
       />
       {/* 카드 요소 */}
