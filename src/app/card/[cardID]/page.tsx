@@ -7,18 +7,11 @@ import React from "react";
  **/
 export default function Page() {
   return (
-    <div
-      style={{
-        flex: 1,
-        display: "flex",
-        justifyContent: "center",
-        padding: "50px",
-      }}
-    >
+    <div className="flex flex-1 justify-center p-12">
       <Card />
     </div>
   );
-};
+}
 
 const 원근감 = '800px';
 
@@ -65,62 +58,26 @@ const Card = () => {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="container"
-      style={{
-        position: "relative",
-        width: "350px",
-        height: "auto",
-        transition: "all 0.1s",
-      }}
+      className="container relative w-[350px] transition-all duration-100"
     >
       {/* 오버레이 요소 */}
       <div
-        className="overlay"
+        className="overlay absolute inset-0 z-10 bg-gradient-to-r from-transparent via-[rgba(255,219,112,0.8)_45%,rgba(132,50,255,0.6)_50%] to-transparent bg-[length:150%_150%] mix-blend-color-dodge pointer-events-none transition-all duration-100"
         style={{
-          position: "absolute",
-          width: "100%",
-          height: "100%",
-          top: 0,
-          left: 0,
-          zIndex: 10,
-          background: `linear-gradient(105deg,
-            transparent 40%,
-            rgba(255, 219, 112, 0.8) 45%,
-            rgba(132, 50, 255, 0.6) 50%,
-            transparent 54%)`,
-          mixBlendMode: "color-dodge",
-          backgroundSize: "150% 150%",
-          transition: "all 0.1s",
-          pointerEvents: "none",
-          ...overlayStyle,
+          backgroundPosition: overlayStyle.backgroundPosition,
+          filter: overlayStyle.filter,
         }}
       />
       {/* 카드 요소 */}
       <div
-        className="card"
+        className="card w-[350px] p-5 bg-yellow-300 rounded-2xl shadow-md transition-transform duration-100"
         style={{
           transform: transform,
-          width: "350px",
-          padding: "20px",
-          backgroundColor: "yellow",
-          borderRadius: "20px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-          transition: "transform 0.1s ease-out",
         }}
       >
-        <div
-          style={{
-            width: "100%",
-            height: "200px",
-            overflow: "hidden",
-            position: "relative",
-          }}
-        >
+        <div className="relative w-full h-[200px] overflow-hidden">
           <Image
-            style={{
-              borderRadius: "10px",
-              objectFit: "cover",
-            }}
+            className="rounded-lg object-cover"
             fill
             sizes="300px"
             objectPosition="center"
@@ -132,29 +89,9 @@ const Card = () => {
           />
         </div>
 
-        <div
-          style={{
-            paddingTop: "16px",
-            paddingBottom: "16px",
-            paddingLeft: "12px",
-            paddingRight: "12px",
-            marginTop: "20px",
-            color: "black",
-            fontFamily: "Arial, sans-serif",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            borderRadius: "10px",
-          }}
-        >
-          <h5
-            style={{
-              fontSize: "18px",
-              fontWeight: "bold",
-              marginBottom: "10px",
-            }}
-          >
-            댕댕이
-          </h5>
-          <div style={{ fontSize: "14px", lineHeight: "1.5" }}>
+        <div className="mt-5 p-3 bg-white bg-opacity-80 rounded-lg text-black font-sans">
+          <h5 className="text-lg font-bold mb-2">댕댕이</h5>
+          <div className="text-sm leading-relaxed">
             <p>귀여운 강아지입니다.</p>
             <p>이 강아지는 매우 친절하고 사랑스러운 성격을 가지고 있습니다.</p>
             <p>강아지와 함께하는 시간은 언제나 즐겁습니다.</p>
