@@ -62,7 +62,7 @@ const Card = () => {
     >
       {/* 오버레이 요소 */}
       <div
-        className="overlay absolute inset-0 z-10 bg-gradient-to-r from-transparent via-[rgba(255,219,112,0.8)_45%,rgba(132,50,255,0.6)_50%] to-transparent bg-[length:150%_150%] mix-blend-color-dodge pointer-events-none transition-all duration-100"
+        className="absolute inset-0 z-10 bg-gradient-to-r from-transparent via-[rgba(255,219,112,0.8)_45%,rgba(132,50,255,0.6)_50%] to-transparent bg-[length:150%_150%] mix-blend-color-dodge pointer-events-none transition-all duration-100"
         style={{
           backgroundPosition: overlayStyle.backgroundPosition,
           filter: overlayStyle.filter,
@@ -70,12 +70,12 @@ const Card = () => {
       />
       {/* 카드 요소 */}
       <div
-        className="card w-[350px] p-5 bg-yellow-300 rounded-2xl shadow-md transition-transform duration-100"
+        className="card w-[350px] aspect-[5/7] p-5 bg-yellow-300 rounded-2xl shadow-md transition-transform duration-100"
         style={{
           transform: transform,
         }}
       >
-        <div className="relative w-full h-[200px] overflow-hidden">
+        <div className="relative w-full h-[60%] overflow-hidden">
           <Image
             className="rounded-lg object-cover"
             fill
@@ -84,14 +84,14 @@ const Card = () => {
             unoptimized
             alt="강아지 이미지"
             src={
-              "https://www.urbanbrush.net/web/wp-content/uploads/edd/2020/06/urbanbrush-20200615000825087215.jpg"
+              "https://img.freepik.com/premium-photo/adorable-white-pomeranian-puppy-spitz_463999-7.jpg?semt=ais_hybrid&w=740"
             }
           />
         </div>
 
-        <div className="mt-5 p-3 bg-white bg-opacity-80 rounded-lg text-black font-sans">
+        <div className="flex flex-col mt-5 p-3 bg-white bg-opacity-80 rounded-lg text-black font-sans">
           <h5 className="text-lg font-bold mb-2">댕댕이</h5>
-          <div className="text-sm leading-relaxed">
+          <div className="flex flex-col text-sm leading-relaxed">
             <p>귀여운 강아지입니다.</p>
             <p>이 강아지는 매우 친절하고 사랑스러운 성격을 가지고 있습니다.</p>
             <p>강아지와 함께하는 시간은 언제나 즐겁습니다.</p>
